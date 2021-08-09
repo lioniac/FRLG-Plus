@@ -12,6 +12,9 @@ gText_SavingDontTurnOffThePower:: @ 81C5625
 gText_PlayerSavedTheGame:: @ 81C5647
 	.string "{PLAYER} saved the game.$"
 
+gText_SaveFailed::
+	.string "Save failed…$"
+
 gText_DifferentGameFile:: @ 81C566A
 	.string "WARNING!\p"
 	.string "There is a different game file that\n"

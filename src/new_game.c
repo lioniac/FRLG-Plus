@@ -29,6 +29,8 @@
 #include "berry_powder.h"
 #include "pokemon_jump.h"
 #include "event_scripts.h"
+#include "save.h"
+#include "rtc.h"
 
 // this file's functions
 static void ResetMiniGamesResults(void);
@@ -112,6 +114,9 @@ void NewGameInitData(void)
 {
     u8 rivalName[PLAYER_NAME_LENGTH + 1];
 
+    if (gSaveFileStatus == SAVE_STATUS_EMPTY || gSaveFileStatus == SAVE_STATUS_INVALID)
+        RtcReset();
+
     StringCopy(rivalName, gSaveBlock1Ptr->rivalName);
     gDifferentSaveFile = TRUE;
     gSaveBlock2Ptr->encryptionKey = 0;
@@ -153,6 +158,7 @@ void NewGameInitData(void)
     ScriptContext2_RunNewScript(EventScript_ResetAllMapFlags);
     StringCopy(gSaveBlock1Ptr->rivalName, rivalName);
     ResetTrainerTowerResults();
+    RtcCalcLocalTime();
     gSaveBlock1Ptr->keyFlags.expMod = 2; // normal exp
     gSaveBlock1Ptr->registeredItemSEL = 0;
     gSaveBlock1Ptr->registeredItemL = 0;
