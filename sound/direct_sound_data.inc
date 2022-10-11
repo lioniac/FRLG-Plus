@@ -2181,4 +2181,4 @@ DirectSoundWaveData_wave_54::
 	.align 2
 DirectSoundWaveData_wave_77::
 	.incbin "sound/direct_sound_samples/wave_77.bin"
-	
+

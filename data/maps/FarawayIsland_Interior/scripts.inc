@@ -222,4 +222,3 @@ FarawayIsland_Interior_Text_TheFeelingOfBeingWatchedFaded: @ 8267EF1
 
 FarawayIsland_Interior_Text_Mew: @ 8267EF1
 	.string "Myuu…$"
-	
