@@ -2423,7 +2423,7 @@ static void BufferMonMoveI(u8 i)
         u8 type = (15 * typeBits) / 63 + 1;
         if (type >= TYPE_MYSTERY)
             type++;
-        //type |= 0xC0;
+
         sMonSummaryScreen->numMoves++;
         sMonSummaryScreen->moveTypes[i] = type;
     }
