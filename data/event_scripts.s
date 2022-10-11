@@ -816,7 +816,7 @@ Text_WantWhichFloor:: @ 81A535C
 
 Text_BagItemCanBeRegistered:: @ 81A5375
 	.string "An item in the BAG can be\n"
-	.string "registered to SELECT for easy use.$"
+	.string "registered for easy use.$"
 
 Text_PlayerBootedUpPC:: @ 81A5420
 	.string "{PLAYER} booted up the PC.$"
@@ -1025,7 +1025,7 @@ EventScript_ChangePokemonNickname:: @ 81A74EB
 	.include "data/scripts/questionnaire.inc"
 
 EventScript_BagItemCanBeRegistered:: @ 81A77A0
-	msgbox Text_BagItemCanBeRegistered, MSGBOX_SIGN
+	@msgbox Text_BagItemCanBeRegistered, MSGBOX_SIGN
 	end
 
 EventScript_Return:: @ 81A77A9

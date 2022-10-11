@@ -92,7 +92,7 @@ void FieldClearPlayerInput(struct FieldInput *input)
     input->tookStep = FALSE;
     input->pressedBButton = FALSE;
     input->pressedRButton = FALSE;
-    input->input_field_1_0 = FALSE;
+    input->pressedLButton = FALSE;
     input->input_field_1_1 = FALSE;
     input->input_field_1_2 = FALSE;
     input->input_field_1_3 = FALSE;
@@ -125,6 +125,8 @@ void FieldGetPlayerInput(struct FieldInput *input, u16 newKeys, u16 heldKeys)
                         input->pressedAButton = TRUE;
                     if (newKeys & B_BUTTON)
                         input->pressedBButton = TRUE;
+                    if (newKeys & L_BUTTON)
+                        input->pressedLButton = TRUE;
                     if (newKeys & R_BUTTON)
                         input->pressedRButton = TRUE;
                 }
@@ -304,13 +306,25 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         ShowStartMenu();
         return TRUE;
     }
-    if (input->pressedSelectButton && UseRegisteredKeyItemOnField() == TRUE)
+
+    if ((input->heldDirection || input->heldDirection2) && input->pressedRButton && (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_ON_FOOT)) && EnableAutoRun())
+        return TRUE;
+
+    if (input->pressedSelectButton && UseRegisteredKeyItemOnField(0) == TRUE)
     {
         gInputToStoreInQuestLogMaybe.pressedSelectButton = TRUE;
         return TRUE;
     }
-    if (input->pressedRButton && (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_ON_FOOT)) && EnableAutoRun())
+    if (input->pressedLButton && UseRegisteredKeyItemOnField(1) == TRUE)
+    {
+        gInputToStoreInQuestLogMaybe.pressedLButton = TRUE;
         return TRUE;
+    }
+    if (input->pressedRButton && UseRegisteredKeyItemOnField(2) == TRUE)
+    {
+        gInputToStoreInQuestLogMaybe.pressedLButton = TRUE;
+        return TRUE;
+    }
     //switch bike gears
     if (input->pressedBButton && (gPlayerAvatar.flags & (PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE)) && GetCurrentRegionMapSectionId() != MAPSEC_ROUTE_17 && SwitchBikeGears())
         return TRUE;
