@@ -87,5 +87,6 @@ void DeserializeTmHmItemSlots(void);
 void DeserializeKeyItemSlots(void);
 u16 GetBagItemQuantity(u16 * ptr);
 bool8 CheckAssetsForSoftlock(void);
+void ItemId_GetHoldEffectParam_Script();
 
 #endif // GUARD_ITEM_H
