@@ -3999,24 +3999,6 @@ static void UpdateCurrentMonBufferFromPartyOrBox(struct Pokemon * mon)
     }
 }
 
-static u8 PokeSum_CanForgetSelectedMove(void)
-{
-    u16 move;
-
-    move = GetMonMoveBySlotId(&sMonSummaryScreen->currentMon, sMoveSelectionCursorPos);
-
-    if(IsMoveHm(move) && (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(TWO_ISLAND_HOUSE) && gSaveBlock1Ptr->location.mapNum == MAP_NUM(TWO_ISLAND_HOUSE)))
-    {   //in Move Reminder's house
-        if(VarGet(VAR_TEMP_0)) //currently in Move Reminder's script
-            return TRUE; //able to overwrite HMs
-    }
-
-    if (IsMoveHm(move) == TRUE && sMonSummaryScreen->mode != PSS_MODE_FORGET_MOVE)
-        return FALSE;
-
-    return TRUE;
-}
-
 static void Task_InputHandler_SelectOrForgetMove(u8 taskId)
 {
     u32 i;
@@ -4094,18 +4076,10 @@ static void Task_InputHandler_SelectOrForgetMove(u8 taskId)
         }
         else if (JOY_NEW(A_BUTTON))
         {
-            if (PokeSum_CanForgetSelectedMove() == TRUE || sMoveSelectionCursorPos == 4)
-            {
-                PlaySE(SE_SELECT);
-                sMoveSwapCursorPos = sMoveSelectionCursorPos;
-                gSpecialVar_0x8005 = sMoveSwapCursorPos;
-                sMonSummaryScreen->selectMoveInputHandlerState = 6;
-            }
-            else
-            {
-                PlaySE(SE_FAILURE);
-                sMonSummaryScreen->selectMoveInputHandlerState = 5;
-            }
+            PlaySE(SE_SELECT);
+            sMoveSwapCursorPos = sMoveSelectionCursorPos;
+            gSpecialVar_0x8005 = sMoveSwapCursorPos;
+            sMonSummaryScreen->selectMoveInputHandlerState = 6;
         }
         else if (JOY_NEW(B_BUTTON))
         {
